@@ -1,0 +1,22 @@
+---
+postfix_relayhost: some.host.domain
+postfix_relayhost_port: 587
+postfix_smtp_tls_cafile: /etc/ssl/certs/ca-certificates.crt
+postfix_smtp_sasl_auth_enable: yes
+postfix_smtp_sasl_security_options: noanonymous
+postfix_smtp_sasl_password_maps: /etc/postfix/sasl/passwd
+postfix_smtp_use_tls: yes
+postfix_smtp_tls_security_level: encrypt
+postfix_smtp_tls_note_starttls_offer: yes
+postfix_message_size_limit: 102400000
+postfix_maildomain: testdomain.com
+postfix_relayhost_user: user-postfix
+postfix_relayhost_password: Aver@gEStr0ngPaSSw0rd
+postfix_aliases:
+  aliases:
+    - name: admin
+      alias: admin@adminever.com
+    - name: google
+      alias: google@gmail.com
+    - name: yahoo
+      alias: yahoo@yahoo.com

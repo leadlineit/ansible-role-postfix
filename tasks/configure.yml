@@ -1,0 +1,39 @@
+---
+- name: Set mailname for host
+  ansible.builtin.template:
+    src: mailname.j2
+    dest: /etc/mailname
+    mode: '0644'
+    owner: root
+    group: root
+
+- name: Configure sender canonical
+  when: postfix_sender_canonical is defined
+  ansible.builtin.template:
+    src: sender_canonical.j2
+    dest: /etc/postfix/sender_canonical
+    mode: '0644'
+    owner: root
+    group: root
+  notify:
+    - Postmap sender_canonical
+
+- name: Configure main.cf for postfix
+  ansible.builtin.template:
+    src: main.cf.j2
+    dest: /etc/postfix/main.cf
+    mode: '0644'
+    owner: root
+    group: root
+  notify:
+    - Restart postfix service
+
+- name: Configure master.cf for postfix
+  ansible.builtin.template:
+    src: master.cf.j2
+    dest: /etc/postfix/master.cf
+    mode: '0644'
+    owner: root
+    group: root
+  notify:
+    - Restart postfix service

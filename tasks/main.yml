@@ -1,0 +1,26 @@
+---
+- name: Include ./install.yml
+  ansible.builtin.include_tasks: install.yml
+  tags:
+    - install_postfix
+    - install
+
+- name: Include ./configure.yml
+  ansible.builtin.include_tasks: configure.yml
+  tags:
+    - configure_postfix
+    - configure
+
+- name: Include ./sasl.yml
+  when: postfix_smtp_sasl_password_maps is defined
+  ansible.builtin.import_tasks: sasl.yml
+  tags:
+    - sasl_postfix
+    - sasl
+
+- name: Include ./aliases.yml
+  when: postfix_aliases is defined
+  ansible.builtin.import_tasks: aliases.yml
+  tags:
+    - aliases_postfix
+    - aliases

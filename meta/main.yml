@@ -1,0 +1,18 @@
+galaxy_info:
+  role_name: postfix
+  namespace: leadlineit
+  author: Artem Kasianchuk
+  description: Install and configure Postfix
+  license: MIT
+  min_ansible_version: '2.15'
+  platforms:
+    - name: Debian
+      versions:
+        - bookworm
+        - bullseye
+        - buster
+  galaxy_tags:
+    - system
+    - debian
+    - mail
+    - postfix

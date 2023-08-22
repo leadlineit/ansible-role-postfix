@@ -1,0 +1,18 @@
+---
+- name: Enable postfix service
+  ansible.builtin.service:
+    name: postfix
+    enabled: true
+
+- name: Restart postfix service
+  ansible.builtin.service:
+    name: postfix
+    state: restarted
+
+- name: Postmap sender_canonical
+  ansible.builtin.shell: 'postmap /etc/postfix/sender_canonical'
+  changed_when: false
+
+- name: Update aliases
+  ansible.builtin.shell: '/usr/bin/newaliases'
+  changed_when: false

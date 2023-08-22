@@ -1,0 +1,22 @@
+---
+- name: Update repo cache and install a few prerequisite packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  with_items:
+    - apt-transport-https
+    - gnupg2
+
+- name: Install postfix and several dependent packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  with_items:
+    - mutt  
+    - postfix
+    - bsd-mailx
+  notify:
+    - Enable postfix service
+    - Restart postfix service

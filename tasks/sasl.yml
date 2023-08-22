@@ -1,0 +1,16 @@
+---
+- name: Configure sasl password maps
+  ansible.builtin.template:
+    src: passwd.j2
+    dest: "{{ postfix_smtp_sasl_password_maps }}"
+    mode: '0600'
+    owner: root
+    group: root
+  notify:
+    - Restart postfix service
+
+- name: Create a hashmap database file for sasl
+  ansible.builtin.shell: 'postmap hash:{{ postfix_smtp_sasl_password_maps }}'
+  changed_when: false
+  notify:
+    - Restart postfix service

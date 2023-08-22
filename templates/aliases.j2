@@ -1,0 +1,6 @@
+#{{ ansible_managed }}
+# See man 5 aliases for format
+postmaster:    root
+{% for i in item.aliases %}
+{{ i.name }}:    {{ i.alias }}
+{% endfor %}
